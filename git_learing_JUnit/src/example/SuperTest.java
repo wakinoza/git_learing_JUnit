@@ -1,20 +1,15 @@
 package example;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+
 
 public abstract class SuperTest {
-  protected Calculator calc;
+  protected static Calculator calc;
 
-  @BeforeEach
-  void init() {
+  @BeforeAll
+  static void initAll() {
     calc = new Calculator();
-    System.out.println("--- [親クラス] テスト環境を初期化しました ---");
-  }
-
-  @AfterEach
-  void tearDown() {
-    System.out.println("--- [親クラス] テストが終了しました ---");
+    System.out.println(">>> [親クラス] @BeforeAll: calcを1回だけ生成しました");
   }
 
 }
