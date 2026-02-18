@@ -19,25 +19,25 @@ class CalculatorTest {
     String str3 = "JUnit";
 
     // 値の比較
-    assertEquals("JUnit", str1, "値が一致するはず");
+    assertEquals("JUnit２", str1, "値が一致しない");
 
     // インスタンス（参照）の比較
-    assertSame(str1, str2, "文字列リテラルなので同じ参照");
-    assertNotSame(str1, str3, "newしているので異なる参照");
+    assertSame(str1, str3, "異なる参照");
+    assertNotSame(str1, str2, "同じ参照");
 
     // 真偽値
-    assertTrue(10 > 5);
-    assertFalse(10 < 5);
+    assertTrue(10 < 5);
+    assertFalse(10 > 5);
   }
 
   @Test
   @DisplayName("Nullのテスト")
   void testNull() {
     Object obj = null;
-    assertNull(obj);
 
     List<String> list = new ArrayList<>();
-    assertNotNull(list);
+    assertNull(list);
+    assertNotNull(obj);
 
   }
 
@@ -47,8 +47,8 @@ class CalculatorTest {
     Calculator calc = new Calculator();
 
     // 1つが失敗しても、残りの検証もすべて実行して結果を出してくれる
-    assertAll("電卓の基本演算", () -> assertEquals(2, calc.add(1, 1)),
-        () -> assertEquals(10, calc.add(5, 5)), () -> assertEquals(0, calc.add(-1, 1)));
+    assertAll("電卓の基本演算", () -> assertEquals(3, calc.add(1, 1)),
+        () -> assertEquals(10, calc.add(5, 5)), () -> assertEquals(1, calc.add(-1, 1)));
   }
 
 }
