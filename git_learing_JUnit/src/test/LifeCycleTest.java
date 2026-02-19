@@ -1,20 +1,19 @@
-package example;
+package test;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class LifeCycleTest {
-  // クラス全体で共有するリスト
   private static List<String> sharedLog = new ArrayList<>();
 
-  // 各テストごとに初期化されるリスト
   private List<String> testList;
 
   @BeforeAll
@@ -26,7 +25,7 @@ class LifeCycleTest {
   @BeforeEach
   void setUp() {
     System.out.println("  > @BeforeEach: テストごとの準備");
-    testList = new ArrayList<>(); // 毎回新品のリストを作成
+    testList = new ArrayList<>();
   }
 
   @Test
@@ -42,7 +41,6 @@ class LifeCycleTest {
   void test2() {
     System.out.println("    [実行] テスト2");
     testList.add("DataB");
-    // もしリセットされていなければ、DataAが残ってサイズが2になってしまう
     assertEquals(1, testList.size(), "テストごとにリセットされるため、サイズは1であるべき");
   }
 
