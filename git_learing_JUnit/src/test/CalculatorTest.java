@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import main.example.Calculator;
 
 class CalculatorTest {
-
   private Calculator calc;
+
 
   @BeforeEach
   void setUp() {
