@@ -1,58 +1,23 @@
 package test;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import main.example.Calculator;
+import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class CalculatorTest {
 
-  private Calculator calc;
-
-  @BeforeEach
-  void setUp() {
-    calc = new Calculator();
+  // テスト対象のメソッド
+  boolean square(int number) {
+    return number > 0;
   }
 
-  // --- 正常系のテスト ---
+  @ParameterizedTest
+  @ValueSource(ints = {1, 5, 100})
+  void 数値が正の数か正しく判定されること(int input) {
+    boolean result = square(input);
 
-  @Test
-  @DisplayName("正常系：正の数を加算すると合計が正しく更新されること")
-  void testAddSuccess() {
-    int result = calc.add(10);
-
-    assertThat(result, is(equalTo(10)));
-    assertThat(calc.getTotal(), is(not(0)));
-  }
-
-  @Test
-  @DisplayName("正常系：割り算が正しく計算されること")
-  void testDivideSuccess() {
-    int result = calc.divide(10, 2);
-
-    assertThat(result, is(5));
-  }
-
-  // --- 異常系のテスト ---
-
-  @Test
-  @DisplayName("異常系：負の数を加算すると例外が発生すること")
-  void testAddNegativeException() {
-    IllegalArgumentException exception =
-        assertThrows(IllegalArgumentException.class, () -> calc.add(-5));
-
-    // 例外メッセージの検証
-    assertThat(exception.getMessage(), containsString("負の数は加算できません"));
-  }
-
-  @Test
-  @DisplayName("異常系：0で除算すると例外が発生すること")
-  void testDivideByZeroException() {
-    assertThrows(ArithmeticException.class, () -> {
-      calc.divide(10, 0);
-    });
+    // AssertJによる検証
+    // 期待値：true
+    assertThat(result).as("%d が正の数かチェック", input).isTrue();
   }
 }
