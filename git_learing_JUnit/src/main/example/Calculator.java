@@ -1,22 +1,22 @@
 package main.example;
 
+/**
+ * 計算機クラス
+ */
 public class Calculator {
-  private int total = 0;
 
-  public int add(int a) {
-    if (a < 0)
-      throw new IllegalArgumentException("負の数は加算できません");
-    total += a;
-    return total;
-  }
-
-  public int divide(int a, int b) {
-    if (b == 0)
-      throw new ArithmeticException("0で割ることはできません");
-    return a / b;
-  }
-
-  public int getTotal() {
-    return total;
+  /**
+   * 除算を行います。
+   *
+   * @param x 被除数
+   * @param y 除数
+   * @return 計算結果
+   * @throws IllegalArgumentException y が 0 の場合
+   */
+  public int divide(int x, int y) {
+    if (y == 0) {
+      throw new IllegalArgumentException("divide by zero");
+    }
+    return x / y;
   }
 }
