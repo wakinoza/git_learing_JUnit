@@ -17,6 +17,9 @@ public class Calculator {
     if (y == 0) {
       throw new IllegalArgumentException("divide by zero");
     }
+    if (x == Integer.MIN_VALUE && y == -1) {
+      throw new ArithmeticException("integer overflow");
+    }
     return x / y;
   }
 }
