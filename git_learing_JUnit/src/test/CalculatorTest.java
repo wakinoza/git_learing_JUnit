@@ -2,6 +2,7 @@ package test;
 
 import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import main.example.Calculator;
@@ -29,6 +30,17 @@ class CalculatorTest {
     assertThatThrownBy(() -> {
       calc.divide(10, 0);
     }).isInstanceOf(IllegalArgumentException.class).hasMessage("divide by zero").hasNoCause();
+  }
+
+  @Test
+  @DisplayName("int型の限界値における挙動の確認")
+  void boundaryValueTest() {
+    assertThat(calc.divide(Integer.MAX_VALUE, 1)).isEqualTo(2147483647);
+
+    assertThat(calc.divide(Integer.MIN_VALUE, 1)).isEqualTo(-2147483648);
+
+    assertThat(calc.divide(Integer.MIN_VALUE, -1)).as("最小値を-1で割るとオーバーフローが発生する")
+        .isEqualTo(Integer.MIN_VALUE);
   }
 
 }
