@@ -1,4 +1,4 @@
-package main.example;
+package test;
 
 import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import main.example.StringUtil;
 
 class StringUtilTest {
 
